@@ -20,7 +20,7 @@ public class MyMathTest {
 	 */
     @Test
     public void testGetSignShouldReturnPositive() {
-    	
+    	Assert.assertEquals("positive",mm.checkSign(2));
     }
     
     /*
@@ -28,10 +28,26 @@ public class MyMathTest {
 	 */
     @Test
     public void testGetSignShouldReturnNegative() {
-
+    	Assert.assertEquals("negative",mm.checkSign(-2));
+    }
+    @Test
+    public void testReverseNegativeToPositive() {
+    	Assert.assertEquals(-4, mm.reverseNumber(4));
+    }
+      
+    @Test
+    public void testReversePositiveToNegative() {
+    	Assert.assertEquals(3, mm.reverseNumber(-3));
     }
     
-    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSignException() {
+    	mm.checkSign(0);
+    } 
+    @Test
+    public void testReverseZero() {
+    	Assert.assertEquals(0, mm.reverseNumber(0));
+    }
 }
 
 
