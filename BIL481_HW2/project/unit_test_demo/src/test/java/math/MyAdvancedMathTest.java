@@ -27,7 +27,7 @@ public class MyAdvancedMathTest {
 	 * when the MyAdvancedMathTest
 	 */
 	public MyAdvancedMathTest() {
-		
+		this.mam=new MyAdvancedMath();
 	}
 	
 
@@ -36,23 +36,35 @@ public class MyAdvancedMathTest {
 	 * the result of the addition doesn't fit 
 	 * in an Integer variable.
 	 */
-	//@Test (expected = IllegalArgumentException.class)
-	//public void testAdd_shouldThrowException_overflow() {
-	//
-	//}
+	@Test (expected = IllegalArgumentException.class)
+	public void testAdd_shouldThrowException_overflow() {
+	mam.add(Integer.MAX_VALUE,1);
+	}
+	@Test
+	public void test_add_normal() {
+		Assert.assertEquals(13, mam.add(4,9));
+	}
+
+	@Test
+	public void testAdd_shouldReturnZero() {
+		Assert.assertEquals(0,mam.add(0,0));
+	}
+
 	
 	/*
 	 * A test case for the exceptions caused when
 	 * one or more input values are negative. Testing
 	 * the exception is performed with a @Rule
 	 */
-	//@Rule 
-	//public ExpectedException thrown = ExpectedException.none(); //initialize it to .none()
-	//@Test 
-	//public void testAdd_shouldThrowException_negativeInput() {
-	//
-	//	
-	//}
+	@Rule 
+	public ExpectedException thrown = ExpectedException.none(); //initialize it to .none()
+	@Test 
+	public void testAdd_shouldThrowException_negativeInput() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Input numbers should be positive.");
+		mam.add(-10,1);
+		
+	}
 		
 	/*
 	 *  The following method aims to test the reverseArray 
@@ -65,7 +77,9 @@ public class MyAdvancedMathTest {
 	 */
 	@Test
 	public void test_reverseArray() {
-
+		MyMath my =new MyMath();
+		int[] dizi= {1,2,-3,-4};
+		Assert.assertArrayEquals(new int[] {-1,-2,3,4}, mam.reverseArray(dizi,my));
 	}
 	
 	/*
@@ -77,6 +91,13 @@ public class MyAdvancedMathTest {
 	 */
 	@Test
 	public void test_reverseArray_Mocking() {
+		MyMath my=mock(MyMath.class);
+		when(my.reverseNumber(1)).thenReturn(-1);
+		when(my.reverseNumber(2)).thenReturn(-2);
+		when(my.reverseNumber(-3)).thenReturn(3);
+		when(my.reverseNumber(-4)).thenReturn(4);
+		int[] dizi= {1,2,-3,-4};
+		Assert.assertArrayEquals(new int[] {-1,-2,3,4}, mam.reverseArray(dizi,my));
 
 
 	}
