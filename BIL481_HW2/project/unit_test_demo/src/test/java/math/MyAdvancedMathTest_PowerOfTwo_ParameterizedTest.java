@@ -35,7 +35,7 @@ public class MyAdvancedMathTest_PowerOfTwo_ParameterizedTest {
 	 */
 	@Parameters
 	public static Collection<Object[]> data() {
-		Object[][] data = new Object[][]{{3,4},{3,3},{4,3}};
+		Object[][] data = new Object[][]{{2,4},{3,8},{4,16}};
 		
 		return Arrays.asList(data);
 	}
@@ -46,7 +46,7 @@ public class MyAdvancedMathTest_PowerOfTwo_ParameterizedTest {
 	 */
 	@Test
 	public void testPowerOfTwoWithNormalCases() {
-
+		Assert.assertEquals(result,mam.powerOfTwo(power));
 	}
 	
 }
